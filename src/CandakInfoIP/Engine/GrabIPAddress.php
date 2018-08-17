@@ -51,6 +51,7 @@ class GrabIPAddress extends ClientAddress
                 'areaCode' => $data->geoplugin_areaCode,
                 'dmaCode' => $data->geoplugin_dmaCode,
                 'countryCode' => $data->geoplugin_countryCode,
+                'countryName' => $data->geoplugin_countryName,
                 'europeArea' => $data->geoplugin_inEU,
                 'euVATrate' => $data->geoplugin_euVATrate,
                 'continentCode' => $data->geoplugin_continentCode,
