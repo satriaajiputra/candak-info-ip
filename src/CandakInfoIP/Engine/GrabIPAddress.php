@@ -37,6 +37,7 @@ class GrabIPAddress extends ClientAddress
      */
     protected function filterData($data)
     {
+        // convert to object
         $this->data = (object) array(
             'server' => array(
                 'request' => $data->geoplugin_request,
