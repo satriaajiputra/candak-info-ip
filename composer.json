@@ -1,0 +1,24 @@
+{
+    "name": "satmaxt/candak-info-ip",
+    "description": "CandakInfoIP is a library for grab IP Address information in any version v4 or v6",
+    "type": "library",
+    "keywords": [
+        "grab ip", "ip address info", "ip address", "ip", "get ip", "geoip", "ip address information"
+    ],
+    "require": {
+        "php": "^5.4 || ^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Satria Aji Putra",
+            "email": "satriamaxt@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CandakInfoIP\\": "src/CandakInfoIP/"
+        }
+    },
+    "minimum-stability": "dev"
+}
