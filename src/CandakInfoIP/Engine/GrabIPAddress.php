@@ -84,6 +84,8 @@ class GrabIPAddress extends ClientAddress
 
         // if $ip is null or false, the system will get the client IP Address automatically
         try {
+
+            // if failed get the ip data
             $data = json_decode(
                 file_get_contents($this->url . "?ip=" . $this->ip)
             );
