@@ -39,12 +39,12 @@ class GrabIPAddress extends ClientAddress
     {
         // convert to object
         $this->data = (object) array(
-            'server' => array(
+            'server' => (object) array(
                 'request' => $data->geoplugin_request,
                 'status' => $data->geoplugin_status,
                 'delay' => $data->geoplugin_delay,
             ),
-            'location' => array(
+            'location' => (object) array(
                 'city' => $data->geoplugin_city,
                 'region' => $data->geoplugin_region,
                 'regionCode' => $data->geoplugin_regionCode,
@@ -62,7 +62,7 @@ class GrabIPAddress extends ClientAddress
                 'locationAccuracyRadius' => $data->geoplugin_locationAccuracyRadius,
                 'timezone' => $data->geoplugin_timezone,
             ),
-            'currency' => array(
+            'currency' => (object) array(
                 'currencyCode' => $data->geoplugin_currencyCode,
                 'currencySymbol' => $data->geoplugin_currencySymbol,
                 'currencySymbol_UTF8' => $data->geoplugin_currencySymbol_UTF8,
@@ -83,9 +83,13 @@ class GrabIPAddress extends ClientAddress
     {
 
         // if $ip is null or false, the system will get the client IP Address automatically
-        $data = json_decode(
-            file_get_contents($this->url . "?ip=" . $this->ip)
-        );
+        try {
+            $data = json_decode(
+                file_get_contents($this->url . "?ip=" . $this->ip)
+            );
+        } catch(\Exception $exception) {
+            die($exception->getMessage());
+        }
         
         // filter default data from grabbed json to custom object
         $data = $this->filterData($data);
