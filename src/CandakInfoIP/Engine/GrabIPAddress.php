@@ -1,6 +1,8 @@
 <?php
 namespace CandakInfoIP\Engine;
 
+use CandakInfoIP\Helpers\ObjectArrayTools as OATools;
+
 class GrabIPAddress extends ClientAddress
 {
     public $url = 'http://www.geoplugin.net/json.gp';
@@ -38,13 +40,13 @@ class GrabIPAddress extends ClientAddress
     protected function filterData($data)
     {
         // convert to object
-        $this->data = (object) array(
-            'server' => (object) array(
+        $filteredData = array(
+            'server' => array(
                 'request' => $data->geoplugin_request,
                 'status' => $data->geoplugin_status,
                 'delay' => $data->geoplugin_delay,
             ),
-            'location' => (object) array(
+            'location' => array(
                 'city' => $data->geoplugin_city,
                 'region' => $data->geoplugin_region,
                 'regionCode' => $data->geoplugin_regionCode,
@@ -62,13 +64,15 @@ class GrabIPAddress extends ClientAddress
                 'locationAccuracyRadius' => $data->geoplugin_locationAccuracyRadius,
                 'timezone' => $data->geoplugin_timezone,
             ),
-            'currency' => (object) array(
+            'currency' => array(
                 'currencyCode' => $data->geoplugin_currencyCode,
                 'currencySymbol' => $data->geoplugin_currencySymbol,
                 'currencySymbol_UTF8' => $data->geoplugin_currencySymbol_UTF8,
                 'currencyConverter' => $data->geoplugin_currencyConverter,
             )
         );
+
+        $this->data = OATools::arrayToObject($filteredData);
 
         return $this->data;
     }
@@ -97,7 +101,7 @@ class GrabIPAddress extends ClientAddress
         $data = $this->filterData($data);
 
         // convert the filtered data object to array if $toArray attribute are true
-        if($toArray) $data = (array)$data;
+        if($toArray) $data = OATools::objectToArray($data);
 
         return $data;
     }
